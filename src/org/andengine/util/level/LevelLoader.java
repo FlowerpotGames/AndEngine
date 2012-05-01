@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import org.andengine.entity.IEntity;
 import org.andengine.util.StreamUtils;
 import org.andengine.util.debug.Debug;
 import org.xml.sax.Attributes;
@@ -16,7 +17,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import android.content.Context;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 
 /**
  * (c) 2010 Nicolas Gramlich
@@ -102,12 +104,12 @@ public class LevelLoader {
 		}
 	}
 
-	public void loadLevelFromAsset(final Context pContext, final String pAssetPath) throws IOException {
-		this.loadLevelFromStream(pContext.getAssets().open(this.mAssetBasePath + pAssetPath));
+	public void loadLevelFromAsset(final AssetManager pAssetManager, final String pAssetPath) throws IOException {
+		this.loadLevelFromStream(pAssetManager.open(this.mAssetBasePath + pAssetPath));
 	}
 
-	public void loadLevelFromResource(final Context pContext, final int pRawResourceID) throws IOException {
-		this.loadLevelFromStream(pContext.getResources().openRawResource(pRawResourceID));
+	public void loadLevelFromResource(final Resources pResources, final int pRawResourceID) throws IOException {
+		this.loadLevelFromStream(pResources.openRawResource(pRawResourceID));
 	}
 
 	public void loadLevelFromStream(final InputStream pInputStream) throws IOException {
@@ -139,16 +141,4 @@ public class LevelLoader {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-
-	public static interface IEntityLoader {
-		// ===========================================================
-		// Constants
-		// ===========================================================
-
-		// ===========================================================
-		// Methods
-		// ===========================================================
-
-		public void onLoadEntity(final String pEntityName, final Attributes pAttributes);
-	}
 }

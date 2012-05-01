@@ -1,46 +1,50 @@
-package org.andengine.engine.options;
+package org.andengine.entity.primitive;
+
+import android.opengl.GLES20;
 
 /**
- * (c) 2010 Nicolas Gramlich
- * (c) 2011 Zynga Inc.
- * 
- * @author Nicolas Gramlich
- * @since 13:01:40 - 02.07.2010
+ * (c) Zynga 2012
+ *
+ * @author Nicolas Gramlich <ngramlich@zynga.com>
+ * @since 18:46:51 - 28.03.2012
  */
-public class RenderOptions {
+public enum DrawMode {
+	// ===========================================================
+	// Elements
+	// ===========================================================
+
+	POINTS(GLES20.GL_POINTS),
+	LINE_STRIP(GLES20.GL_LINE_STRIP),
+	LINE_LOOP(GLES20.GL_LINE_LOOP),
+	LINES(GLES20.GL_LINES),
+	TRIANGLE_STRIP(GLES20.GL_TRIANGLE_STRIP),
+	TRIANGLE_FAN(GLES20.GL_TRIANGLE_FAN),
+	TRIANGLES(GLES20.GL_TRIANGLES);
+
 	// ===========================================================
 	// Constants
 	// ===========================================================
+
+	public final int mDrawMode;
 
 	// ===========================================================
 	// Fields
 	// ===========================================================
 
-	private boolean mMultiSampling = false;
-	private boolean mDithering = false;
-
 	// ===========================================================
 	// Constructors
 	// ===========================================================
+
+	private DrawMode(final int pDrawMode) {
+		this.mDrawMode = pDrawMode;
+	}
 
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
 
-	public boolean isMultiSampling() {
-		return this.mMultiSampling;
-	}
-
-	public void setMultiSampling(final boolean pMultiSampling) {
-		this.mMultiSampling = pMultiSampling;
-	}
-
-	public boolean isDithering() {
-		return this.mDithering;
-	}
-
-	public void setDithering(final boolean pDithering) {
-		this.mDithering = pDithering;
+	public int getDrawMode() {
+		return this.mDrawMode;
 	}
 
 	// ===========================================================
